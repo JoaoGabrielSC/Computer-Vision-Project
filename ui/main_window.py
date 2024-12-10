@@ -114,7 +114,7 @@ class MainWindow(QMainWindow):
             grid_layout.addWidget(line_edit, (i-1)//2, 2*((i-1)%2) + 1)
             line_edits.append(line_edit)
 
-        update_button = QPushButton("Atualizar")
+        update_button = QPushButton("Atualizar intrisecos")
 
         update_button.clicked.connect(lambda: self.update_params_intrinsc(line_edits))
 
@@ -150,8 +150,9 @@ class MainWindow(QMainWindow):
             grid_layout.addWidget(line_edit, (i-1)//2, 2*((i-1)%2) + 1)
             line_edits.append(line_edit)
 
-        update_button = QPushButton("Atualizar")
+        update_button = QPushButton("Atualizar Mundo")
 
+        print("Perfoming Update World")
         update_button.clicked.connect(lambda: self.update_world(line_edits))
 
         line_edit_layout.addLayout(grid_layout)
@@ -185,7 +186,7 @@ class MainWindow(QMainWindow):
             grid_layout.addWidget(line_edit, (i-1)//2, 2*((i-1)%2) + 1)
             line_edits.append(line_edit)
 
-        update_button = QPushButton("Atualizar")
+        update_button = QPushButton("Atualizar Camera")
         update_button.clicked.connect(lambda: self.update_cam(line_edits))
 
         line_edit_layout.addLayout(grid_layout)
@@ -258,6 +259,7 @@ class MainWindow(QMainWindow):
             self.stheta,
         ]
 
+        
         data = [
             float(line_edits[i].text()) if line_edits[i].text().strip() else _data[i]
             for i in range(len(_data))
@@ -268,7 +270,8 @@ class MainWindow(QMainWindow):
         
         return 
 
-    def clear_line_edit(self, line_edits: List[QLineEdit]) -> None:
+    @staticmethod
+    def clear_line_edit(line_edits: List[QLineEdit]) -> None:
         """
         Clears the text from all QLineEdit objects in the list.
         """
@@ -284,10 +287,12 @@ class MainWindow(QMainWindow):
         """
         
         data = [
-            float(edit.text()) if edit.text().strip() else 0.0
+            int(edit.text()) if edit.text().strip() else 0.0
             for edit in line_edits
         ]
-                
+
+        print(f"----- data: {data}")
+
         x_move, x_angle = data[0], data[1]
         y_move, y_angle = data[2], data[3]
         z_move, z_angle = data[4], data[5]
@@ -316,9 +321,11 @@ class MainWindow(QMainWindow):
         """
         
         data = [
-            float(edit.text()) if edit.text().strip() else 0.0
+            int(edit.text()) if edit.text().strip() else 0.0
             for edit in line_edits
         ]
+
+        print(f"----- data: {data}")
 
         x_move, x_angle = data[0], data[1]
         y_move, y_angle = data[2], data[3]
@@ -329,7 +336,7 @@ class MainWindow(QMainWindow):
         Rx = cam_rotation(self.camera, 'x', x_angle)
         Ry = cam_rotation(self.camera, 'y', y_angle)
         Rz = cam_rotation(self.camera, 'z', z_angle)
-        
+
         # Ordem escolhida
         R = Rx @ Ry @ Rz
         M = T @ R

@@ -21,7 +21,7 @@ def world_translation(x: float, y: float, z: float ) -> np.ndarray:
     return translate_matrix
 
 
-def world_rotation(eixo: str, theta: float) -> np.ndarray:
+def world_rotation(eixo: str, theta: float | int) -> np.ndarray:
     """
     Calculate rotation matrix for world coordinates
     Args:
@@ -30,9 +30,6 @@ def world_rotation(eixo: str, theta: float) -> np.ndarray:
     Returns:
         np.ndarray: rotation matrix
     """
-    
-    theta = theta * pi / 180
-    
     rotation_matrices = RotationMatrices.from_theta(theta)
     rotation_matrix = getattr(rotation_matrices, eixo, None)
     
