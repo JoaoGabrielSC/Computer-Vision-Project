@@ -2,8 +2,10 @@
 
 Esse programa simula o comportamento de uma câmera em um ambiente tridimensional e permite controlar tanto os parâmetros extrínsecos quanto intrínsecos, possibilitando uma visualização detalhada da interação entre a câmera e o objeto.
 
-## TODO
-- [x] Corrigir a rotação da câmera
+# Exemplo de uso
+![image](https://github.com/user-attachments/assets/64181102-956a-4975-95ce-0eabc0403fb9)
+![image](https://github.com/user-attachments/assets/9fe156c0-47ba-447c-bc50-37e0a66a177d)
+![image](https://github.com/user-attachments/assets/3b72693c-bb19-4b47-bd58-597c321434f4)
 
 ## Requisitos
 
